@@ -1,0 +1,33 @@
+{
+    "name": "MarioControls",
+    "maps": [
+        {
+            "name": "Mario",
+            "id": "62f3094f-72c9-4d14-ab14-de6c089c906d",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Button",
+                    "id": "687171b2-982c-4dc4-9ced-5567ea7a5ce0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "41cde6e0-4bcb-4bc4-8401-fd8c1d1b3631",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
