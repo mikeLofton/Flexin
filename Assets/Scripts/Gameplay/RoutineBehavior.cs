@@ -33,6 +33,7 @@ public class RoutineBehavior : MonoBehaviour
     /// </summary>
     /// <param name="args">Any additional arguments for the limited event.</param>
     public delegate void TimedEvent(params object[] args);
+    public delegate void TimedEventNoArgs();
     
     /// <summary>
     /// An object that raises an event after a given duration.
@@ -107,6 +108,29 @@ public class RoutineBehavior : MonoBehaviour
         _timedActions.Add(action);
 
         //Return the new action for debugging purposes
+        return action;
+    }
+
+    public TimedAction StartNewTimedAction(TimedEventNoArgs timedEvent, TimedActionCountType countType, float duration)
+    {
+        TimedAction action = new TimedAction(new TimedEvent(args => timedEvent.Invoke()), countType, duration);
+
+        switch (countType)
+        {
+            case TimedActionCountType.SCALEDTIME:
+                action.TimedStarted = Time.time;
+                break;
+            case TimedActionCountType.UNSCALEDTIME:
+                action.TimedStarted = Time.unscaledTime;
+                break;
+            case TimedActionCountType.FRAME:
+                action.TimedStarted = Time.frameCount;
+                break;
+        }
+
+        action.IsActive = true;
+        _timedActions.Add(action);
+
         return action;
     }
 

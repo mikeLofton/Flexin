@@ -5,16 +5,17 @@ using UnityEngine;
 public class CubeColorBehavior : MonoBehaviour
 {
     private MeshRenderer _renderer;
+    private bool _active = true;
     private RoutineBehavior.TimedAction _currentAction;
 
     // Start is called before the first frame update
     void Start()
     {
-        _renderer.GetComponent<MeshRenderer>();
-        RoutineBehavior.Instance.StartNewTimedAction(args => ChangeColor(), TimedActionCountType.SCALEDTIME, 3);
+        _renderer = GetComponent<MeshRenderer>();
+        _currentAction = RoutineBehavior.Instance.StartNewTimedAction(args => ChangeRandomColor(), TimedActionCountType.SCALEDTIME, 3);
     }
 
-    public void ChangeColor()
+    public void ChangeRandomColor()
     {
         _renderer.material.color = new Color(Random.value, Random.value, Random.value, 1);
     }
@@ -22,7 +23,7 @@ public class CubeColorBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_currentAction.IsActive)
-            _currentAction = RoutineBehavior.Instance.StartNewTimedAction()
+        if (!_currentAction.IsActive)
+            _currentAction = RoutineBehavior.Instance.StartNewTimedAction(args => ChangeRandomColor(), TimedActionCountType.SCALEDTIME, 1);
     }
 }
